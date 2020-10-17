@@ -11,7 +11,8 @@
         return {
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qpage.pages',
-          permission: 'iblog.categories',
+          permission: 'page.pages',
+          extraFormFields: 'crud-fields.Page.pages',
           create: {
             title: this.$tr('qpage.layout.newPage'),
           },
