@@ -12,7 +12,7 @@
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qpage.pages',
           permission: 'page.pages',
-          extraFormFields: 'crud-fields.Page.pages',
+          extraFormFields: 'Page.crud-fields.pages',
           create: {
             title: this.$tr('qpage.layout.newPage'),
           },
