@@ -10,6 +10,7 @@
       crudData() {
         return {
           crudId: this.crudId,
+          entityName: config("main.qpage.entityNames.page"),
           apiRoute: 'apiRoutes.qpage.pages',
           permission: 'page.pages',
           extraFormFields: 'Page.crud-fields.pages',
