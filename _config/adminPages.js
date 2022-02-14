@@ -8,7 +8,7 @@ export default {
     crud : import('@imagina/qpage/_crud/pages'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qpage.sidebar.adminPages',
+    title: 'page.cms.sidebar.adminPages',
     icon: 'fas fa-columns',
     subHeader: {
       refresh: true,

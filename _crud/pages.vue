@@ -15,24 +15,24 @@
           permission: 'page.pages',
           extraFormFields: 'Page.crud-fields.pages',
           create: {
-            title: this.$tr('qpage.layout.newPage'),
+            title: this.$tr('page.cms.newPage'),
           },
           read: {
             columns: [
-              {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
-              {name: 'title', label: this.$tr('ui.form.title'), field: 'title', align: 'rigth'},
-              {name: 'slug', label: this.$tr('ui.form.slug'), field: 'slug', align: 'left'},
-              {name: 'status', label: this.$tr('ui.form.status'), field: 'status', align: 'left'},
+              {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
+              {name: 'title', label: this.$tr('isite.cms.form.title'), field: 'title', align: 'rigth'},
+              {name: 'slug', label: this.$tr('isite.cms.form.slug'), field: 'slug', align: 'left'},
+              {name: 'status', label: this.$tr('isite.cms.form.status'), field: 'status', align: 'left'},
               {
-                name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
+                name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
               },
-              {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
+              {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
             requestParams: {}
           },
           update: {
-            title: this.$tr('qpage.layout.updatePage')
+            title: this.$tr('page.cms.updatePage')
           },
           delete: true,
           formLeft: {
@@ -44,9 +44,9 @@
               type: 'input',
               isTranslatable: true,
               props: {
-                label: `${this.$tr('ui.form.title')}*`,
+                label: `${this.$tr('isite.cms.form.title')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               },
             },
@@ -55,9 +55,9 @@
               type: 'input',
               isTranslatable: true,
               props: {
-                label: `${this.$tr('ui.form.slug')}*`,
+                label: `${this.$tr('isite.cms.form.slug')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -66,9 +66,9 @@
               type: 'html',
               isTranslatable: true,
               props: {
-                label: `${this.$tr('ui.form.description')}*`,
+                label: `${this.$tr('isite.cms.form.description')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -79,10 +79,10 @@
               type: 'select',
               isTranslatable: true,
               props: {
-                label: this.$tr('ui.form.status'),
+                label: this.$tr('isite.cms.form.status'),
                 options: [
-                  {label: this.$tr('ui.label.enabled'), value: '1'},
-                  {label: this.$tr('ui.label.disabled'), value: '0'},
+                  {label: this.$tr('isite.cms.label.enabled'), value: '1'},
+                  {label: this.$tr('isite.cms.label.disabled'), value: '0'},
                 ]
               }
             },
@@ -91,7 +91,7 @@
               isTranslatable: true,
               type: 'input',
               props: {
-                label: this.$tr('ui.form.metaTitle'),
+                label: this.$tr('isite.cms.form.metaTitle'),
               }
             },
             metaDescription: {
@@ -99,7 +99,7 @@
               type: 'input',
               isTranslatable: true,
               props: {
-                label: this.$tr('ui.form.metaDescription'),
+                label: this.$tr('isite.cms.form.metaDescription'),
                 type: 'textarea',
                 rows: 3
               }
@@ -109,7 +109,7 @@
               value: {},
               type: 'media',
               props: {
-                label: this.$tr('ui.form.firstImage'),
+                label: this.$tr('isite.cms.form.firstImage'),
                 zone: 'mainimage',
                 entity: "Modules\\Page\\Entities\\Page",
                 entityId: null
