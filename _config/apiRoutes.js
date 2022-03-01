@@ -6,5 +6,6 @@ const urlBase = `/${moduleName}/${moduleVersion}`
 export default {
   urlBase : urlBase,
   version: moduleVersion,
-  pages: `${urlBase}/pages/cms`,
+  pages: `${urlBase}/pages`,
+  pagesCms: `${urlBase}/pages/cms`,
 }
