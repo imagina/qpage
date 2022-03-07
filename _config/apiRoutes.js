@@ -7,4 +7,5 @@ export default {
   urlBase : urlBase,
   version: moduleVersion,
   pages: `${urlBase}/pages`,
+  pagesCms: `${urlBase}/pages/cms`,
 }
