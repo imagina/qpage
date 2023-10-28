@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
-# QAd
+# QPage
 
 This module has the same structure of any other module.
