@@ -29,7 +29,7 @@
               },
               {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
-            requestParams: {}
+            requestParams: { include: 'qrs' }
           },
           update: {
             title: this.$tr('page.cms.updatePage')
