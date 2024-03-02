@@ -72,6 +72,34 @@
                 ],
               }
             },
+            type: {
+              value: '',
+              type: 'select',
+              help: {
+                description: this.$tr('ibuilder.cms.form.layoutType')
+              },
+              props: {
+                label: this.$tr('isite.cms.form.type'),
+                vIf: this.typeOptions.length,
+                clearable: true,
+                options: this.typeOptions
+              }
+            },
+            layoutBuilder: {
+              value: '',
+              type: 'select',
+              name: 'layoutId',
+              fakeFieldName: 'builder',
+              props: {
+                label: this.$tr('isite.cms.form.layout'),
+                vIf: !!this.crudInfo.type,
+              },
+              loadOptions: {
+                apiRoute: 'apiRoutes.qbuilder.layouts',
+                select: {label: 'title', id: 'id'},
+                requestParams: { filter: { type: this.crudInfo.type, entity_type: "Modules\\Page\\Entities\\Page" }}
+              }
+            },
           },
           formRight: {
             status: {
@@ -134,6 +162,23 @@
       //Crud info
       crudInfo() {
         return this.$store.state.qcrudComponent.component[this.crudId] || {}
+      },
+      //Return the configBuilder by module only with values
+      builderConfig() {
+        let config = this.$store.getters['qsiteApp/getConfigApp']('builder.layout', true)
+        let response = {}
+
+        //Filter only items with values
+        Object.keys(config).forEach(moduleName => {
+          if (config[moduleName]) response[moduleName] = config[moduleName]
+        })
+
+        return response
+      },
+      // Return the type options by entityType selected
+      typeOptions() {
+        let moduleBuilderConfig = Object.values(this.builderConfig).flat().find(item => item.entity.value == "Modules\\Page\\Entities\\Page")
+        return moduleBuilderConfig.types
       }
     },
   }
