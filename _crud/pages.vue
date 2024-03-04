@@ -95,7 +95,7 @@
               name: 'layoutId',
               fakeFieldName: 'buildable',
               props: {
-                label: this.$tr('isite.cms.form.layout'),
+                label: this.$tr('ibuilder.cms.form.layout'),
                 vIf: !!this.crudInfo.buildable?.type,
                 clearable: true,
               },
