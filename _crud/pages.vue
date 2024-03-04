@@ -99,7 +99,6 @@
                 label: this.$tr('ibuilder.cms.form.layout'),
                 vIf: !!this.crudInfo.buildable?.type,
                 clearable: true,
-                readonly: !!(!this.$auth.hasAccess('ibuilder.buildables.edit') && this.crudInfo.typeForm == 'update'),
               },
               loadOptions: {
                 apiRoute: 'apiRoutes.qbuilder.layouts',
