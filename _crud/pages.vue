@@ -3,7 +3,8 @@
   export default {
     data() {
       return {
-        crudId: this.$uid()
+        crudId: this.$uid(),
+        buildType: null
       }
     },
     computed: {
@@ -32,7 +33,8 @@
             requestParams: { include: 'qrs' }
           },
           update: {
-            title: this.$tr('page.cms.updatePage')
+            title: this.$tr('page.cms.updatePage'),
+            requestParams: { include: 'buildable' }
           },
           delete: true,
           formLeft: {
@@ -75,6 +77,8 @@
             type: {
               value: '',
               type: 'select',
+              name: 'type',
+              fakeFieldName: 'buildable',
               help: {
                 description: this.$tr('ibuilder.cms.form.layoutType')
               },
@@ -89,15 +93,16 @@
               value: '',
               type: 'select',
               name: 'layoutId',
-              fakeFieldName: 'builder',
+              fakeFieldName: 'buildable',
               props: {
                 label: this.$tr('isite.cms.form.layout'),
-                vIf: !!this.crudInfo.type,
+                vIf: !!this.crudInfo.buildable?.type,
+                clearable: true,
               },
               loadOptions: {
                 apiRoute: 'apiRoutes.qbuilder.layouts',
                 select: {label: 'title', id: 'id'},
-                requestParams: { filter: { type: this.crudInfo.type, entity_type: "Modules\\Page\\Entities\\Page" }}
+                requestParams: { filter: { type: this.crudInfo.buildable?.type ?? '', entity_type: "Modules\\Page\\Entities\\Page" }}
               }
             },
           },
@@ -157,6 +162,18 @@
               }
             },
           },
+          handleFormUpdates: (formData, changedFields, formType) => {
+            return new Promise(resolve => {
+             if(!formData.buildable) resolve(formData);
+
+             if (changedFields.length === 1 && changedFields.includes('buildable') && this.buildType !== formData.buildable?.type) {
+               formData.buildable.layoutId = null
+               this.buildType = formData.buildable?.type
+             }
+
+             resolve(formData)
+           })
+          }
         }
       },
       //Crud info
