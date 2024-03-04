@@ -86,6 +86,7 @@
                 label: this.$tr('isite.cms.form.type'),
                 vIf: this.typeOptions.length,
                 clearable: true,
+                readonly: !!(!this.$auth.hasAccess('ibuilder.buildables.edit') && this.crudInfo.typeForm == 'update'),
                 options: this.typeOptions
               }
             },
@@ -98,6 +99,7 @@
                 label: this.$tr('ibuilder.cms.form.layout'),
                 vIf: !!this.crudInfo.buildable?.type,
                 clearable: true,
+                readonly: !!(!this.$auth.hasAccess('ibuilder.buildables.edit') && this.crudInfo.typeForm == 'update'),
               },
               loadOptions: {
                 apiRoute: 'apiRoutes.qbuilder.layouts',
