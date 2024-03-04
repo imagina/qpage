@@ -75,7 +75,7 @@
               }
             },
             type: {
-              value: '',
+              value: null,
               type: 'select',
               name: 'type',
               fakeFieldName: 'buildable',
@@ -90,7 +90,7 @@
               }
             },
             layoutBuilder: {
-              value: '',
+              value: null,
               type: 'select',
               name: 'layoutId',
               fakeFieldName: 'buildable',
@@ -180,8 +180,9 @@
       crudInfo() {
         return this.$store.state.qcrudComponent.component[this.crudId] || {}
       },
-      //Return the configBuilder by module only with values
-      builderConfig() {
+      // Return the type options by entityType selected
+      typeOptions() {
+        //configBuilder by module only with values
         let config = this.$store.getters['qsiteApp/getConfigApp']('builder.layout', true)
         let response = {}
 
@@ -190,11 +191,7 @@
           if (config[moduleName]) response[moduleName] = config[moduleName]
         })
 
-        return response
-      },
-      // Return the type options by entityType selected
-      typeOptions() {
-        let moduleBuilderConfig = Object.values(this.builderConfig).flat().find(item => item.entity.value == "Modules\\Page\\Entities\\Page")
+        let moduleBuilderConfig = Object.values(response).flat().find(item => item.entity.value == "Modules\\Page\\Entities\\Page")
         return moduleBuilderConfig.types
       }
     },
