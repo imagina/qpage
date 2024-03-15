@@ -3,7 +3,8 @@
   export default {
     data() {
       return {
-        crudId: this.$uid()
+        crudId: this.$uid(),
+        buildType: null
       }
     },
     computed: {
@@ -32,13 +33,14 @@
             requestParams: { include: 'qrs' }
           },
           update: {
-            title: this.$tr('page.cms.updatePage')
+            title: this.$tr('page.cms.updatePage'),
+            requestParams: {include: 'buildable'}
           },
           delete: true,
           formLeft: {
             id: {value: ''},
             userId: {value: this.$store.state.quserAuth.userId},
-            template : {value : 'default'},
+            template: {value : 'default'},
             title: {
               value: '',
               type: 'input',
@@ -70,6 +72,40 @@
                 rules: [
                   val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
+              }
+            },
+            type: {
+              value: 'general',
+              type: 'select',
+              name: 'type',
+              fakeFieldName: 'buildable',
+              props: {
+                label: this.$tr('isite.cms.form.type'),
+                readonly: !!(!this.$hasAccess('ibuilder.buildables.edit') && this.crudInfo.typeForm == 'update'),
+                options: [
+                  {label: 'General', value: 'general'},
+                  ...this.typeOptions
+                ]
+              }
+            },
+            layoutBuilder: {
+              value: null,
+              type: 'select',
+              name: 'layoutId',
+              fakeFieldName: 'buildable',
+              props: {
+                label: this.$tr('ibuilder.cms.form.layout'),
+                clearable: true,
+              },
+              loadOptions: {
+                apiRoute: 'apiRoutes.qbuilder.layouts',
+                select: {label: 'title', id: 'id'},
+                requestParams: {
+                  filter: {
+                    type: this.crudInfo.buildable?.type ?? '',
+                    entity_type: "Modules\\Page\\Entities\\Page"
+                  }
+                }
               }
             },
           },
@@ -129,11 +165,37 @@
               }
             },
           },
+          handleFormUpdates: (formData, changedFields, formType) => {
+            return new Promise(resolve => {
+              if (!formData.buildable) resolve(formData);
+
+              if (changedFields.length === 1 && changedFields.includes('buildable') && this.buildType !== formData.buildable?.type) {
+                formData.buildable.layoutId = null
+                this.buildType = formData.buildable?.type
+              }
+
+              resolve(formData)
+            })
+          }
         }
       },
       //Crud info
       crudInfo() {
         return this.$store.state.qcrudComponent.component[this.crudId] || {}
+      },
+      // Return the type options by entityType selected
+      typeOptions() {
+        //configBuilder by module only with values
+        let config = this.$store.getters['qsiteApp/getConfigApp']('builder.layout', true)
+        let response = {}
+
+        //Filter only items with values
+        Object.keys(config).forEach(moduleName => {
+          if (config[moduleName]) response[moduleName] = config[moduleName]
+        })
+
+        let moduleBuilderConfig = Object.values(response).flat().find(item => item.entity.value == "Modules\\Page\\Entities\\Page")
+        return moduleBuilderConfig.types
       }
     },
   }
