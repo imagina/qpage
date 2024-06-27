@@ -1,7 +1,15 @@
-import layout from 'modules/qpage/_i18n/en-us/layout'
-import sidebar from 'modules/qpage/_i18n/en-us/sidebar'
-
 export default {
-  layout,
-  sidebar
+  "page": {
+    "cms": {
+      "sidebar": {
+        "adminPages": "Pages"
+      },
+      "newPage": "New Page",
+      "updatePage": "Update Page",
+      "page": "Page",
+      "documentation": {
+        "pages": "You can manage the static pages of your WEB site so that you can modify the content that is displayed, such as titles, paragraphs, text colors, adding images, tec..."
+      }
+    }
+  }
 }
