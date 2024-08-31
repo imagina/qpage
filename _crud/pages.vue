@@ -1,5 +1,6 @@
 <template></template>
 <script>
+  import axios from 'axios'
   export default {
     data() {
       return {
@@ -30,7 +31,17 @@
               },
               {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
-            requestParams: { include: 'qrs' }
+            requestParams: { include: 'qrs' },
+            actions: [
+              {
+                name: 'cleanCache',
+                label: this.$tr('isite.cms.configList.clearCache'),
+                icon: 'fa-light fa-broom', 
+                action: (row) => {
+                  axios.get(row.url, { headers: { 'icache-bypass': 1 } })
+                }
+              },
+            ]
           },
           update: {
             title: this.$tr('page.cms.updatePage'),
