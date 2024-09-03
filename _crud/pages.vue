@@ -1,6 +1,7 @@
 <template></template>
 <script>
   import axios from 'axios'
+  import { alert } from 'src/plugins/utils.ts'
   export default {
     data() {
       return {
@@ -39,6 +40,7 @@
                 icon: 'fa-light fa-broom', 
                 action: (row) => {
                   axios.get(row.url, { headers: { 'icache-bypass': 1 } })
+                  alert.info(this.$tr('isite.cms.label.success'))
                 }
               },
             ]
