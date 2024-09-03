@@ -39,7 +39,11 @@
                 label: this.$tr('isite.cms.configList.clearCache'),
                 icon: 'fa-light fa-broom', 
                 action: (row) => {
-                  axios.get(row.url, { headers: { 'icache-bypass': 1 } })
+                  axios.get(row.url, {
+                    headers: { 'icache-bypass': 1 },
+                    params: {},
+                    paramsSerializer: () => ''
+                  });
                   alert.info(this.$tr('isite.cms.label.success'))
                 }
               },
