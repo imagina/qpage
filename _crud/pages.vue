@@ -1,58 +1,62 @@
 <template></template>
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   data() {
     return {
       crudId: this.$uid(),
       buildType: null
-    }
+    };
   },
   computed: {
     crudData() {
       return {
         crudId: this.crudId,
-        entityName: config("main.qpage.entityNames.page"),
+        entityName: config('main.qpage.entityNames.page'),
         apiRoute: 'apiRoutes.qpage.pages',
         permission: 'page.pages',
         extraFormFields: 'Page.crud-fields.pages',
         create: {
-          title: this.$tr('page.cms.newPage'),
+          title: this.$tr('page.cms.newPage')
         },
         read: {
           columns: [
-            {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
-            {name: 'title', label: this.$tr('isite.cms.form.title'), field: 'title', align: 'rigth'},
-            {name: 'slug', label: this.$tr('isite.cms.form.slug'), field: 'slug', align: 'left'},
-            {name: 'status', label: this.$tr('isite.cms.form.status'), field: 'status', align: 'left'},
+            { name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px' },
+            { name: 'title', label: this.$tr('isite.cms.form.title'), field: 'title', align: 'rigth' },
+            { name: 'slug', label: this.$tr('isite.cms.form.slug'), field: 'slug', align: 'left' },
+            { name: 'status', label: this.$tr('isite.cms.form.status'), field: 'status', align: 'left' },
             {
               name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
-              format: val => val ? this.$trd(val) : '-',
+              format: val => val ? this.$trd(val) : '-'
             },
-            {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
+            { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' }
           ],
-          requestParams: {include: 'qrs'},
+          requestParams: { include: 'qrs' },
           actions: [
             {
               name: 'cleanCache',
               label: this.$tr('isite.cms.configList.clearCache'),
               icon: 'fa-light fa-broom',
               action: (row) => {
-                axios.get(row.url, { headers: { 'icache-bypass': 1 } })
+                axios.get(row.url, {
+                  headers: { 'icache-bypass': 1 },
+                  params: {},
+                  paramsSerializer: () => ''
+                });
               }
-            },
+            }
           ]
         },
         update: {
           title: this.$tr('page.cms.updatePage'),
-          requestParams: {include: 'buildable'}
+          requestParams: { include: 'buildable' }
         },
         delete: true,
         formLeft: {
-          id: {value: ''},
-          userId: {value: this.$store.state.quserAuth.userId},
-          template: {value: 'default'},
+          id: { value: '' },
+          userId: { value: this.$store.state.quserAuth.userId },
+          template: { value: 'default' },
           title: {
             value: '',
             type: 'input',
@@ -61,8 +65,8 @@ export default {
               label: `${this.$tr('isite.cms.form.title')}*`,
               rules: [
                 val => !!val || this.$tr('isite.cms.message.fieldRequired')
-              ],
-            },
+              ]
+            }
           },
           slug: {
             value: '',
@@ -72,7 +76,7 @@ export default {
               label: `${this.$tr('isite.cms.form.slug')}*`,
               rules: [
                 val => !!val || this.$tr('isite.cms.message.fieldRequired')
-              ],
+              ]
             }
           },
           body: {
@@ -83,7 +87,7 @@ export default {
               label: `${this.$tr('isite.cms.form.description')}*`,
               rules: [
                 val => !!val || this.$tr('isite.cms.message.fieldRequired')
-              ],
+              ]
             }
           },
           type: {
@@ -95,7 +99,7 @@ export default {
               label: this.$tr('isite.cms.form.type'),
               readonly: !!(!this.$auth.hasAccess('ibuilder.buildables.edit') && this.crudInfo.typeForm == 'update'),
               options: [
-                {label: 'General', value: 'general'},
+                { label: 'General', value: 'general' },
                 ...this.typeOptions
               ]
             }
@@ -107,19 +111,19 @@ export default {
             fakeFieldName: 'buildable',
             props: {
               label: this.$tr('ibuilder.cms.form.layout'),
-              clearable: true,
+              clearable: true
             },
             loadOptions: {
               apiRoute: 'apiRoutes.qbuilder.layouts',
-              select: {label: 'title', id: 'id'},
+              select: { label: 'title', id: 'id' },
               requestParams: {
                 filter: {
                   type: this.crudInfo.buildable?.type ?? '',
-                  entity_type: "Modules\\Page\\Entities\\Page"
+                  entity_type: 'Modules\\Page\\Entities\\Page'
                 }
               }
             }
-          },
+          }
         },
         formRight: {
           status: {
@@ -129,8 +133,8 @@ export default {
             props: {
               label: this.$tr('isite.cms.form.status'),
               options: [
-                {label: this.$tr('isite.cms.label.enabled'), value: '1'},
-                {label: this.$tr('isite.cms.label.disabled'), value: '0'},
+                { label: this.$tr('isite.cms.label.enabled'), value: '1' },
+                { label: this.$tr('isite.cms.label.disabled'), value: '0' }
               ]
             }
           },
@@ -139,7 +143,7 @@ export default {
             isTranslatable: true,
             type: 'input',
             props: {
-              label: this.$tr('isite.cms.form.metaTitle'),
+              label: this.$tr('isite.cms.form.metaTitle')
             }
           },
           metaDescription: {
@@ -161,8 +165,8 @@ export default {
               useChips: true,
               multiple: true,
               hideDropdownIcon: true,
-              inputDebounce: "0",
-              newValueMode: "add-unique"
+              inputDebounce: '0',
+              newValueMode: 'add-unique'
             }
           },
           mediasSingle: {
@@ -172,43 +176,43 @@ export default {
             props: {
               label: this.$tr('isite.cms.form.firstImage'),
               zone: 'mainimage',
-              entity: "Modules\\Page\\Entities\\Page",
+              entity: 'Modules\\Page\\Entities\\Page',
               entityId: null
             }
-          },
+          }
         },
         handleFormUpdates: (formData, changedFields, formType) => {
           return new Promise(resolve => {
             if (!formData.buildable) resolve(formData);
 
             if (changedFields.length === 1 && changedFields.includes('buildable') && this.buildType !== formData.buildable?.type) {
-              formData.buildable.layoutId = null
-              this.buildType = formData.buildable?.type
+              formData.buildable.layoutId = null;
+              this.buildType = formData.buildable?.type;
             }
 
-            resolve(formData)
-          })
+            resolve(formData);
+          });
         }
-      }
+      };
     },
     //Crud info
     crudInfo() {
-      return this.$store.state.qcrudComponent.component[this.crudId] || {}
+      return this.$store.state.qcrudComponent.component[this.crudId] || {};
     },
     // Return the type options by entityType selected
     typeOptions() {
       //configBuilder by module only with values
-      let config = this.$store.getters['qsiteApp/getConfigApp']('builder.layout', true)
-      let response = {}
+      let config = this.$store.getters['qsiteApp/getConfigApp']('builder.layout', true);
+      let response = {};
 
       //Filter only items with values
       Object.keys(config).forEach(moduleName => {
-        if (config[moduleName]) response[moduleName] = config[moduleName]
-      })
+        if (config[moduleName]) response[moduleName] = config[moduleName];
+      });
 
-      let moduleBuilderConfig = Object.values(response).flat().find(item => item.entity.value == "Modules\\Page\\Entities\\Page")
-      return moduleBuilderConfig.types
+      let moduleBuilderConfig = Object.values(response).flat().find(item => item.entity.value == 'Modules\\Page\\Entities\\Page');
+      return moduleBuilderConfig.types;
     }
-  },
-}
+  }
+};
 </script>
