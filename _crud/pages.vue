@@ -44,6 +44,7 @@ export default {
                   params: {},
                   paramsSerializer: () => ''
                 });
+                alert.info(this.$tr('isite.cms.label.success'))
               }
             }
           ]
