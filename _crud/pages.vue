@@ -37,7 +37,7 @@
               {
                 name: 'cleanCache',
                 label: this.$tr('isite.cms.configList.clearCache'),
-                icon: 'fa-light fa-broom', 
+                icon: 'fa-light fa-broom',
                 action: (row) => {
                   axios.get(row.url, {
                     headers: { 'icache-bypass': 1 },
@@ -212,7 +212,7 @@
         })
 
         let moduleBuilderConfig = Object.values(response).flat().find(item => item.entity.value == "Modules\\Page\\Entities\\Page")
-        return moduleBuilderConfig.types
+        return moduleBuilderConfig?.types || []
       }
     },
   }
