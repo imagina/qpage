@@ -1,7 +1,6 @@
 <template></template>
 <script>
   import axios from 'axios'
-  import { alert } from 'src/plugins/utils.ts'
   export default {
     data() {
       return {
@@ -44,7 +43,7 @@
                     params: {},
                     paramsSerializer: () => ''
                   });
-                  alert.info(this.$tr('isite.cms.label.success'))
+                  this.$alert.info(this.$tr('isite.cms.label.success'))
                 }
               },
             ]
