@@ -1,4 +1,4 @@
-const moduleName = 'page';
+const moduleName = 'ipage';
 const moduleVersion = 'v1';
 const urlBase = `/${moduleName}/${moduleVersion}`
 

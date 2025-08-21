@@ -13,7 +13,7 @@
           crudId: this.crudId,
           entityName: config("main.qpage.entityNames.page"),
           apiRoute: 'apiRoutes.qpage.pages',
-          permission: 'page.pages',
+          permission: 'ipage.pages',
           extraFormFields: 'Page.crud-fields.pages',
           create: {
             title: this.$tr('page.cms.newPage'),
@@ -30,12 +30,12 @@
               },
               {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
-            requestParams: { include: 'qrs' },
+            requestParams: { include: 'qrs,translations' },
             actions: []
           },
           update: {
             title: this.$tr('page.cms.updatePage'),
-            requestParams: {include: 'buildable'}
+            requestParams: {include: 'translations'}
           },
           delete: true,
           formLeft: {
@@ -75,6 +75,7 @@
                 ],
               }
             },
+            /*
             type: {
               value: 'general',
               type: 'select',
@@ -109,6 +110,7 @@
                 }
               }
             },
+            */
           },
           formRight: {
             status: {

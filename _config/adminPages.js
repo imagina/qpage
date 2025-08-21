@@ -1,6 +1,6 @@
 export default {
   pages: {
-    permission: 'page.pages.manage',
+    permission: 'ipage.pages.manage',
     activated: true,
     authenticated: true,
     path: '/page/pages/index',
