@@ -105,7 +105,7 @@
                 requestParams: {
                   filter: {
                     type: this.crudInfo.buildable?.type ?? '',
-                    entity_type: "Modules\\Page\\Entities\\Page"
+                    entity_type: "Modules\\Ipage\\Models\\Page"
                   }
                 }
               }
@@ -163,7 +163,7 @@
               props: {
                 label: this.$tr('isite.cms.form.firstImage'),
                 zone: 'mainimage',
-                entity: "Modules\\Page\\Entities\\Page",
+                entity: "Modules\\Ipage\\Models\\Page",
                 entityId: null
               }
             },
@@ -197,7 +197,7 @@
           if (config[moduleName]) response[moduleName] = config[moduleName]
         })
 
-        let moduleBuilderConfig = Object.values(response).flat().find(item => item.entity.value == "Modules\\Page\\Entities\\Page")
+        let moduleBuilderConfig = Object.values(response).flat().find(item => item.entity.value == "Modules\\Ipage\\Models\\Page")
         return moduleBuilderConfig?.types || []
       }
     },
